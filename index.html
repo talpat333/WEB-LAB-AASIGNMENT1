@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Car Racing Game</title>
+
+    <!-- CSS styling is included in this HTML file -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #10131c;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        header {
+            padding: 15px;
+        }
+
+        header h1 {
+            color: #00f5d4;
+            letter-spacing: 4px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        .game {
+            width: 340px;
+            max-width: 95%;
+            margin: 10px auto;
+            padding: 15px;
+            background: #1b2030;
+            border-radius: 15px;
+            box-shadow: 0 0 15px #00f5d455;
+        }
+
+        /* Scoreboard */
+        .dashboard {
+            display: flex;
+            justify-content: space-around;
+            background: #292f42;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .dashboard span {
+            color: #00f5d4;
+            font-size: 10px;
+        }
+
+        .dashboard h3 {
+            margin-top: 5px;
+        }
+
+        /* Start button */
+        #start {
+            display: none;
+        }
+
+        .start-btn {
+            display: inline-block;
+            background: #00f5d4;
+            color: #10131c;
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .start-btn:hover {
+            background: white;
+            transform: scale(1.05);
+        }
+
+        /* Racing road */
+        .road {
+            position: relative;
+            width: 280px;
+            max-width: 100%;
+            height: 450px;
+            margin: auto;
+            overflow: hidden;
+            background: #343943;
+            border-left: 5px solid #00f5d4;
+            border-right: 5px solid #00f5d4;
+        }
+
+        /* Road lane markings */
+        .road-lines {
+            position: absolute;
+            left: 48%;
+            width: 5px;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                white 0px,
+                white 35px,
+                transparent 35px,
+                transparent 70px
+            );
+            opacity: 0.7;
+        }
+
+        .car {
+            position: absolute;
+            font-size: 35px;
+            z-index: 2;
+        }
+
+        /* Player car */
+        .player {
+            bottom: 20px;
+            left: 42%;
+        }
+
+        /* Enemy cars */
+        .enemy {
+            top: -60px;
+            animation: enemyMove 4s linear infinite;
+            animation-play-state: paused;
+        }
+
+        .red {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .yellow {
+            left: 60%;
+            animation-delay: 1.3s;
+        }
+
+        .blue {
+            left: 35%;
+            animation-delay: 2.5s;
+        }
+
+        @keyframes enemyMove {
+            from {
+                top: -60px;
+            }
+            to {
+                top: 460px;
+            }
+        }
+
+        /* Start animations on click */
+        #start:checked ~ .road .enemy {
+            animation-play-state: running;
+        }
+
+        #start:checked ~ .road .road-lines {
+            animation: roadMove 0.5s linear infinite;
+        }
+
+        @keyframes roadMove {
+            from {
+                background-position-y: 0;
+            }
+            to {
+                background-position-y: 70px;
+            }
+        }
+
+        .instructions {
+            font-size: 12px;
+            color: #bbb;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            color: #777;
+            font-size: 12px;
+            padding: 15px;
+        }
+
+        /* Mobile responsive design */
+        @media (max-width: 400px) {
+            header h1 {
+                font-size: 25px;
+            }
+
+            .road {
+                height: 420px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>NEON RACER</h1>
+        <p>READY TO HIT THE ROAD?</p>
+    </header>
+
+    <main class="game">
+
+        <!-- Scoreboard -->
+        <div class="dashboard">
+            <div>
+                <span>SCORE</span>
+                <h3>0000</h3>
+            </div>
+
+            <div>
+                <span>SPEED</span>
+                <h3>120 km/h</h3>
+            </div>
+
+            <div>
+                <span>LEVEL</span>
+                <h3>01</h3>
+            </div>
+        </div>
+
+        <!-- Start button -->
+        <input type="checkbox" id="start">
+        <label for="start" class="start-btn">START RACE</label>
+
+        <!-- Racing track -->
+        <div class="road">
+            <div class="road-lines"></div>
+
+            <div class="car enemy red">🚗</div>
+            <div class="car enemy yellow">🚙</div>
+            <div class="car enemy blue">🚕</div>
+
+            <div class="car player">🏎️</div>
+        </div>
+
+        <p class="instructions">
+            Stay focused • Avoid traffic • Enjoy the ride!
+        </p>
+
+    </main>
+
+    <footer>
+        Mini Car Racing Game | HTML & CSS Project
+    </footer>
+
+</body>
+</html>
